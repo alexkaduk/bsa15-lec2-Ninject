@@ -1,0 +1,8 @@
+H:\projects\bsa15-lec2-Ninject\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+H:\projects\bsa15-lec2-Ninject\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
+H:\projects\bsa15-lec2-Ninject\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+H:\projects\bsa15-lec2-Ninject\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+H:\projects\bsa15-lec2-Ninject\ConsoleApplication1\bin\Debug\Ninject.dll
+H:\projects\bsa15-lec2-Ninject\ConsoleApplication1\bin\Debug\Ninject.xml
+H:\projects\bsa15-lec2-Ninject\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+H:\projects\bsa15-lec2-Ninject\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
