@@ -1,0 +1,1 @@
+log to txt file: check http://google.com.ua --> true

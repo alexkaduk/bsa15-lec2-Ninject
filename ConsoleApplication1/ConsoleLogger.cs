@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace ConsoleApplication1
 {
-    class Logger : ILogger
+    class ConsoleLogger : ILogger
     {
-        public void Log(bool result)
+        public void Log(string host, bool result)
         {
             if (result)
             {
-                Console.WriteLine("result true");
+                Console.WriteLine("result: check {0} --> true", host);
             }
             else
             {
-                Console.WriteLine("result fasle");
+                Console.WriteLine("result: check {0} --> false", host);
             }
         }
     }

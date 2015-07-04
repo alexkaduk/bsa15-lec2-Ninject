@@ -8,6 +8,6 @@ namespace ConsoleApplication1
 {
     public interface ILogger
     {
-        void Log(bool result);
+        void Log(string host, bool result);
     }
 }

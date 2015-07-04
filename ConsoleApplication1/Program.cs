@@ -10,38 +10,47 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            iocInit();
+            string loggerType = System.Configuration.ConfigurationManager.AppSettings["loggerType"];
+            string host = System.Configuration.ConfigurationManager.AppSettings["host"];
+
+            iocInit(loggerType);
 
             var checker = Ioc.Get<IChecker>();
-
             var result = checker.Check();
-
+            
             var logger = Ioc.Get<ILogger>();
-
-            logger.Log(result);
-
+            logger.Log(host, result);
+            
+            Console.ReadKey();
         }
 
-        private static void iocInit()
+        private static void iocInit(string loggerType)
         {
-            var simple = true;
-
             Ioc.Init((kernel) =>
             {
-                if (simple)
+                kernel.Bind<IChecker>().To<Checker>().InTransientScope();
+                
+                if (loggerType == LoggerType.console.ToString())
                 {
-                    kernel.Bind<IChecker>().To<Checker>().InTransientScope();
-                    kernel.Bind<ILogger>().To<Logger>().InTransientScope(); 
-                    // kernel.Bind<ICalculator>().To<SimpleCalculator>().InSingletonScope();
-                    // kernel.Bind<ICalculator>().To<SimpleCalculator>().InThreadScope(); // 1 instance pre thread
+                    kernel.Bind<ILogger>().To<ConsoleLogger>().InTransientScope();
+                }
+                else if (loggerType == LoggerType.txtFile.ToString())
+                {
+                    kernel.Bind<ILogger>().To<TxtFileLogger>().InTransientScope();
                 }
                 else
-                {
-                    kernel.Bind<IChecker>().To<Checker>().InTransientScope();
-                    kernel.Bind<ILogger>().To<Logger>().InTransientScope(); 
+                { 
+                    // default log to console
+                    kernel.Bind<ILogger>().To<ConsoleLogger>().InTransientScope();
                 }
-                //kernel.Bind<ServerProxy>().ToSelf();
             });
+
         }
+
+        public enum LoggerType
+        {
+            console,
+            txtFile
+        };
     }
 }
