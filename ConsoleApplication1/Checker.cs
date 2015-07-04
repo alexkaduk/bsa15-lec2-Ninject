@@ -12,10 +12,15 @@ namespace ConsoleApplication1
 {
     public class Checker : IChecker
     {
+        private string host;
+
+        public Checker()
+        {
+            host = System.Configuration.ConfigurationManager.AppSettings["host"];
+        }
+        
         public bool Check()
         {
-            string host = System.Configuration.ConfigurationManager.AppSettings["host"];
-
             try
             {
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(host);
@@ -40,17 +45,6 @@ namespace ConsoleApplication1
                 // Error
                 return false;
             }
-
-            //var ping = new Ping();
-            //try
-            //{
-            //    var reply = ping.Send(host);
-            //    return reply.Status == IPStatus.Success;
-            //}
-            //catch
-            //{
-            //    return false;
-            //}
         }
     }
 }

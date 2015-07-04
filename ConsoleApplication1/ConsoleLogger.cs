@@ -12,11 +12,11 @@ namespace ConsoleApplication1
         {
             if (result)
             {
-                Console.WriteLine("result: check {0} --> true", host);
+                Console.WriteLine("result: check {0} --> available", host);
             }
             else
             {
-                Console.WriteLine("result: check {0} --> false", host);
+                Console.WriteLine("result: check {0} --> unavailable", host);
             }
         }
     }

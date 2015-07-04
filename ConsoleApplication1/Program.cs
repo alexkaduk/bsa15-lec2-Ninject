@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace ConsoleApplication1
 {
@@ -16,12 +17,18 @@ namespace ConsoleApplication1
             iocInit(loggerType);
 
             var checker = Ioc.Get<IChecker>();
-            var result = checker.Check();
-            
             var logger = Ioc.Get<ILogger>();
-            logger.Log(host, result);
-            
-            Console.ReadKey();
+
+            Console.WriteLine("Checking {0} availability ...", host);
+            Console.WriteLine("Press any key to quit\n");
+
+            do
+            {
+                var result = checker.Check();
+                logger.Log(host, result);
+                Thread.Sleep(800);
+            }
+            while (Console.KeyAvailable == false);
         }
 
         private static void iocInit(string loggerType)
@@ -29,7 +36,7 @@ namespace ConsoleApplication1
             Ioc.Init((kernel) =>
             {
                 kernel.Bind<IChecker>().To<Checker>().InTransientScope();
-                
+
                 if (loggerType == LoggerType.console.ToString())
                 {
                     kernel.Bind<ILogger>().To<ConsoleLogger>().InTransientScope();
@@ -39,7 +46,7 @@ namespace ConsoleApplication1
                     kernel.Bind<ILogger>().To<TxtFileLogger>().InTransientScope();
                 }
                 else
-                { 
+                {
                     // default log to console
                     kernel.Bind<ILogger>().To<ConsoleLogger>().InTransientScope();
                 }

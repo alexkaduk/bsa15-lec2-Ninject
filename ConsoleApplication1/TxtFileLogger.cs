@@ -16,30 +16,19 @@ using System.Text;namespace ConsoleApplication1
         {
             if (result)
             {
-                message = "log to txt file: check " + host + " --> true";
+                message = "check " + host + " --> available";
             }
             else
             {
-                message = "log to txt file: check " + host + " --> false";
+                message = "check " + host + " --> unavailable";
             }
 
-            if (File.Exists(filePath))
+            using (StreamWriter file = File.AppendText(filePath)) 
             {
-                File.Delete(filePath);
+                file.WriteLine(DateTime.Today.ToString() + " | " + message);
             }
 
-            using (FileStream fs = File.Create(filePath))
-            {
-                AddText(fs, message);
-            }
-
-            Console.WriteLine("results write to txt file");
-        }
-
-        private static void AddText(FileStream fs, string value)
-        {
-            byte[] info = new UTF8Encoding(true).GetBytes(value);
-            fs.Write(info, 0, info.Length);
+            Console.WriteLine("result writes to txt file...");
         }
     }
 }
